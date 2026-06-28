@@ -157,6 +157,14 @@ async function poll(offset = 0) {
   }
 }
 
+// Keep Render alive with a tiny HTTP server
+const { createServer } = require("http");
+const PORT = process.env.PORT || 3000;
+createServer((req, res) => {
+  res.writeHead(200);
+  res.end("Spend Tracker Bot is running 🤖");
+}).listen(PORT, () => console.log(`HTTP server on port ${PORT}`));
+
 async function main() {
   console.log("🤖 Spend Tracker Bot is running...");
   let offset = 0;
